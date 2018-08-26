@@ -3,6 +3,8 @@ package cn.appsys.service.developer;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import cn.appsys.dao.appinfo.AppInfoMapper;
@@ -10,6 +12,7 @@ import cn.appsys.pojo.AppInfo;
 
 @Service
 public class AppInfoServiceImpl implements AppInfoService {
+	@Resource
 	private AppInfoMapper appInfoMapper;
 
 	@Override
