@@ -46,7 +46,7 @@
 		<div class="login_wrapper">
 			<h1>APP信息管理系统</h1>
 			<div>
-				<a class="btn btn-link" href="index.html">后台管理系统入口</a>
+				<a class="btn btn-link" href="manager/index.html">后台管理系统入口</a>
 			</div>
 			<div>
 				<a class="btn btn-link" href="dev/login.html">开发者管理入口</a>
