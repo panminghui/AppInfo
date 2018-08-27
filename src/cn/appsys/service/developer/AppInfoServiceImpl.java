@@ -23,7 +23,7 @@ public class AppInfoServiceImpl implements AppInfoService {
 		List<AppInfo> list = new ArrayList<AppInfo>();
 		try {
 			list = appInfoMapper.getAppInfoList(querySoftwareName, queryStatus, queryCategoryLevel1,
-					queryCategoryLevel2, queryCategoryLevel3, queryFlatformId, devId, currentPageNo, pageSize);
+					queryCategoryLevel2, queryCategoryLevel3, queryFlatformId, devId, (currentPageNo-1)*pageSize, pageSize);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
