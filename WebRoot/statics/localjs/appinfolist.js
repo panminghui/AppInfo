@@ -106,9 +106,10 @@ $(document).on("click",".saleSwichOpen,.saleSwichClose",function(){
 });
 
 var saleSwitchAjax = function(appId,obj){
+	alert("喜欢你");
 	$.ajax({
 		type:"PUT",
-		url:appId+"/sale.json",
+		url:"/AppInfo/app/"+appId+"/sale",
 		dataType:"json",
 		success:function(data){
 			/*

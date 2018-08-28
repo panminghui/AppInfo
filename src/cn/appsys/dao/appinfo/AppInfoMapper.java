@@ -33,10 +33,11 @@ public interface AppInfoMapper {
 			@Param(value = "categoryLevel2") Integer queryCategoryLevel2,
 			@Param(value = "categoryLevel3") Integer queryCategoryLevel3,
 			@Param(value = "flatformId") Integer queryFlatformId, @Param(value = "devId") Integer devId);
-	
-	public AppInfo getAppInfo(@Param(value="id")Integer id,
-			@Param(value="APKName")String APKName)throws Exception;
-	
-	public int updateStatus(@Param(value="status")Integer status,
-			@Param(value="id")Integer id) throws Exception;
+
+	public AppInfo getAppInfo(@Param(value = "id") Integer id, @Param(value = "APKName") String APKName)
+			throws Exception;
+
+	public int updateStatus(@Param(value = "status") Integer status, @Param(value = "id") Integer id) throws Exception;
+
+	public int modify(AppInfo appInfo) throws Exception;
 }

@@ -1,5 +1,6 @@
 package cn.appsys.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -187,5 +189,50 @@ public class AppInfoController {
 			e.printStackTrace();
 		}
 		return categoryLevelList;
+	}
+	/**
+	 * 实现上下架操作
+	 * @param appid
+	 * @param session
+	 * @return
+	 */
+	@RequestMapping(value="/{appid}/sale",method=RequestMethod.PUT)
+	@ResponseBody
+	public Object sale(@PathVariable String appid,HttpSession session){
+		HashMap<String, Object> resultMap = new HashMap<String, Object>();
+		Integer appIdInteger = 0;
+		try{
+			appIdInteger = Integer.parseInt(appid);
+		}catch(Exception e){
+			appIdInteger = 0;
+		}
+		resultMap.put("errorCode", "0");
+		resultMap.put("appId", appid);
+		if(appIdInteger>0){
+			try {
+				DevUser devUser = (DevUser)session.getAttribute(Constants.DEV_USER_SESSION);
+				AppInfo appInfo = new AppInfo();
+				appInfo.setId(appIdInteger);
+				appInfo.setModifyBy(devUser.getId());
+				if(appInfoService.appsysUpdateSaleStatusByAppId(appInfo)){
+					resultMap.put("resultMsg", "success");
+				}else{
+					resultMap.put("resultMsg", "success");
+				}		
+			} catch (Exception e) {
+				resultMap.put("errorCode", "exception000001");
+			}
+		}else{
+			//errorCode:0为正常
+			resultMap.put("errorCode", "param000001");
+		}
+		
+		/*
+		 * resultMsg:success/failed
+		 * errorCode:exception000001
+		 * appId:appId
+		 * errorCode:param000001
+		 */
+		return resultMap;
 	}
 }

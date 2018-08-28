@@ -27,4 +27,11 @@ public interface AppInfoService {
 
 	public int getAppInfoCount(String querySoftwareName, Integer queryStatus, Integer queryCategoryLevel1,
 			Integer queryCategoryLevel2, Integer queryCategoryLevel3, Integer queryFlatformId, Integer devId);
+	/**
+	 * update Sale Status By AppId and Operator
+	 * @param appId
+	 * @return
+	 * @throws Exception
+	 */
+	public boolean appsysUpdateSaleStatusByAppId(AppInfo appInfo) throws Exception;
 }
