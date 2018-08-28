@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import cn.appsys.pojo.AppCategory;
 import cn.appsys.pojo.AppInfo;
+import cn.appsys.pojo.AppVersion;
 import cn.appsys.pojo.DataDictionary;
 import cn.appsys.service.backend.AppService;
 import cn.appsys.service.developer.AppCategoryService;
@@ -170,5 +171,39 @@ public class AppCheckController {
 			pid = null;
 		}
 		return getCategoryList(pid);
+	}
+	
+	/**
+	 * 跳转到APP信息审核页面
+	 * @param appId
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping(value="/check",method=RequestMethod.GET)
+	public String check(@RequestParam(value="aid",required=false) String appId,
+			Model model){
+		AppInfo appInfo = null;
+		try {
+			appInfo = appService.getAppInfo(Integer.parseInt(appId));
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		model.addAttribute(appInfo);
+		return "backend/appcheck";
+	}
+	
+	@RequestMapping(value="/checksave",method=RequestMethod.POST)
+	public String checksave(AppInfo appInfo){
+		logger.debug("appInfo=================== > " + appInfo.getStatus());
+		try {
+			if(appService.updateStatus(appInfo.getStatus(), appInfo.getId())){
+				return "redirect:/manager/backend/list";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return "backend/appcheck";
 	}
 }
